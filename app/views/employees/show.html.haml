@@ -1,0 +1,13 @@
+%p
+   = @employee.name 
+   works for
+   = @employee.corporation.name
+
+%p
+   Address:
+   = @employee.address.street
+   in
+   = @employee.address.city
+
+%p
+   = link_to 'Back to Employee list', employees_path

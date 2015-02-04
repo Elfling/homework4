@@ -1,0 +1,33 @@
+%title Edit contacts
+%h1 Edit contact
+Please, note that all fields are required. Write "none" if the contact person doesn't have a pet.
+=form_for @person do |p| 
+   %p
+      = p.label :first_name, 'First name:'
+      = p.text_field :first_name 
+   %p
+      = p.label :last_name, 'Last name:'
+      = p.text_field :last_name 
+
+
+   = p.fields_for :contact do |c|
+      %p
+         = c.label :mail, 'E-mail:'
+         = c.text_field :mail
+         
+      %p
+         = c.label :phone, 'Phone:'
+         = c.text_field :phone
+         
+   = p.fields_for :pet do |pt|
+      %p
+         = pt.label :name, "Pet's name"
+         = pt.text_field :name
+         
+      %p
+         = pt.label :animal, "Pet's kind"
+         = pt.text_field :animal
+   %p
+      = p.submit 'Add contact', :class => "form_submit"
+   
+= link_to 'Back to Contacts list', people_path

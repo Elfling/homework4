@@ -1,0 +1,416 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: articles; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE articles (
+    id integer NOT NULL,
+    title character varying(255),
+    text text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.articles OWNER TO lila;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: lila
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.articles_id_seq OWNER TO lila;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: lila
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- Name: contacts; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE contacts (
+    id integer NOT NULL,
+    name character varying(255),
+    mail character varying(255),
+    phone character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.contacts OWNER TO lila;
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE; Schema: public; Owner: lila
+--
+
+CREATE SEQUENCE contacts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contacts_id_seq OWNER TO lila;
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: lila
+--
+
+ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id integer NOT NULL,
+    order_id character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.orders OWNER TO lila;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: lila
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO lila;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: lila
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
+-- Name: product_lines; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE product_lines (
+    id integer NOT NULL,
+    order_id character varying(255),
+    product_id character varying(255),
+    amount integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.product_lines OWNER TO lila;
+
+--
+-- Name: product_lines_id_seq; Type: SEQUENCE; Schema: public; Owner: lila
+--
+
+CREATE SEQUENCE product_lines_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.product_lines_id_seq OWNER TO lila;
+
+--
+-- Name: product_lines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: lila
+--
+
+ALTER SEQUENCE product_lines_id_seq OWNED BY product_lines.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE products (
+    id integer NOT NULL,
+    product_id character varying(255),
+    name character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.products OWNER TO lila;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: lila
+--
+
+CREATE SEQUENCE products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO lila;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: lila
+--
+
+ALTER SEQUENCE products_id_seq OWNED BY products.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO lila;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: lila
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: lila
+--
+
+ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: lila
+--
+
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: lila
+--
+
+ALTER TABLE ONLY product_lines ALTER COLUMN id SET DEFAULT nextval('product_lines_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: lila
+--
+
+ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
+
+
+--
+-- Data for Name: articles; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY articles (id, title, text, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lila
+--
+
+SELECT pg_catalog.setval('articles_id_seq', 1, false);
+
+
+--
+-- Data for Name: contacts; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY contacts (id, name, mail, phone, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lila
+--
+
+SELECT pg_catalog.setval('contacts_id_seq', 1, false);
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY orders (id, order_id, created_at, updated_at) FROM stdin;
+1	1	\N	\N
+2	2	\N	\N
+\.
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lila
+--
+
+SELECT pg_catalog.setval('orders_id_seq', 2, true);
+
+
+--
+-- Data for Name: product_lines; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY product_lines (id, order_id, product_id, amount, created_at, updated_at) FROM stdin;
+1	1	101	20	\N	\N
+2	1	102	3	\N	\N
+3	2	104	100	\N	\N
+\.
+
+
+--
+-- Name: product_lines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lila
+--
+
+SELECT pg_catalog.setval('product_lines_id_seq', 3, true);
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY products (id, product_id, name, created_at, updated_at) FROM stdin;
+1	101	zeszyt	\N	\N
+2	102	książka	\N	\N
+3	103	zszywacz	\N	\N
+4	104	pióro	\N	\N
+\.
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lila
+--
+
+SELECT pg_catalog.setval('products_id_seq', 4, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: lila
+--
+
+COPY schema_migrations (version) FROM stdin;
+20141018181308
+20141018194014
+20141030190655
+20141030190724
+20141030190736
+\.
+
+
+--
+-- Name: articles_pkey; Type: CONSTRAINT; Schema: public; Owner: lila; Tablespace: 
+--
+
+ALTER TABLE ONLY articles
+    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: lila; Tablespace: 
+--
+
+ALTER TABLE ONLY contacts
+    ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: lila; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_lines_pkey; Type: CONSTRAINT; Schema: public; Owner: lila; Tablespace: 
+--
+
+ALTER TABLE ONLY product_lines
+    ADD CONSTRAINT product_lines_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: lila; Tablespace: 
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: lila; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
