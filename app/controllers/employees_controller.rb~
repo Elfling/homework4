@@ -43,7 +43,7 @@ def new
     #@corpo = @employee.corporation.find(params[:id])
     #@corpo.destroy
     @employee.destroy
-    redirect_to employees_index_path
+    redirect_to employee_path
   end
  
  private

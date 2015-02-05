@@ -1,33 +1,26 @@
-%title Edit contacts
-%h1 Edit contact
-Please, note that all fields are required. Write "none" if the contact person doesn't have a pet.
-=form_for @person do |p| 
-   %p
-      = p.label :first_name, 'First name:'
-      = p.text_field :first_name 
-   %p
-      = p.label :last_name, 'Last name:'
-      = p.text_field :last_name 
+%h1 Edit Employee
 
+=form_for @employee do |e| 
+   %e
+      = e.label :name, 'Name:'
+      = e.text_field :name 
 
-   = p.fields_for :contact do |c|
-      %p
-         = c.label :mail, 'E-mail:'
-         = c.text_field :mail
-         
-      %p
-         = c.label :phone, 'Phone:'
-         = c.text_field :phone
-         
-   = p.fields_for :pet do |pt|
-      %p
-         = pt.label :name, "Pet's name"
-         = pt.text_field :name
-         
-      %p
-         = pt.label :animal, "Pet's kind"
-         = pt.text_field :animal
-   %p
-      = p.submit 'Add contact', :class => "form_submit"
+   %br
+   = e.fields_for :address do |a|
+      %e
+         = a.label :street, 'Street:'
+         = a.text_field :street
+      %br   
+      %e
+         = a.label :city, 'City:'
+         = a.text_field :city
+   %br      
+   = e.fields_for :corporation do |corpo|
+      %e
+         = corpo.label :name, 'Corporation:'
+         = corpo.text_field :name
+   %br
+   %e
+      = e.submit 'Add employee to database', :class => "form_submit"
    
-= link_to 'Back to Contacts list', people_path
+= link_to 'Back to Employee list', employees_path
